@@ -67,7 +67,7 @@ const IndexPage = (props) => {
         {tweetSeiza()}&ensp;
         {tweetColor()}&ensp;
         <nav className={styles.all}>
-          <a href="/api/" style={{ color: 'white' }}>API</a>
+          <a href="https://uranai-api.hals.one/api/" style={{ color: 'white' }}>API</a>
         </nav>
       </span>
       <details className={styles.all}>
