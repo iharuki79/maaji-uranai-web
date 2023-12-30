@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import { Lucky, Color2RGB } from '../interfaces';
+import { Color2RGB } from '../interfaces';
 import styles from "./index.module.css";
 
 export async function getServerSideProps(context) {
@@ -23,12 +23,12 @@ const IndexPage = (props) => {
   else if (today.getMonth() == 11 && today.getDate() == 25) emoji = '🎄';
   const [date, setToday] = useState<string>(today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日 (0時更新)' + emoji);
 
-  const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF'
+  const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
 
   const tweetSeiza = () => {
     let href = 'https://twitter.com/intent/tweet?text=';
     href += encodeURIComponent('⭐まぁじ占い⭐\n今日もっとも運勢のいい星座は...' + today_result.seiza + '！' + emoji + '\n');
-    href += '&url=https://uranai.hals.one/'
+    href += '&url=https://uranai.hals.one/';
     return (
       <a href={href} target='_blank' rel="noopener noreferrer">
         星座をツイート
@@ -38,7 +38,7 @@ const IndexPage = (props) => {
   const tweetColor = () => {
     let href = 'https://twitter.com/intent/tweet?text=';
     href += encodeURIComponent('⭐まぁじ占い⭐\n今日のラッキーカラーは…' + today_result.color + '！' + emoji + '\n');
-    href += '&url=https://uranai.hals.one/'
+    href += '&url=https://uranai.hals.one/';
     return (
       <a href={href} target='_blank' rel="noopener noreferrer">
         ラッキーカラーをツイート
@@ -75,14 +75,14 @@ const IndexPage = (props) => {
         ⭐まぁじ占い⭐は完全に適当でありこれによって生じたことについて責任を負いません。ご注意ください。
       </details>
       <p>
-        不具合報告は<a href='https://x.com/Hals_SC'>Twitter</a>まで
+        不具合報告は<a href='https://x.com/Hals_SC'>Twitter</a>, もしくは<a href='https://github.com/HalsSC/maaji-uranai-web'>GitHub</a>まで
       </p>
       <footer>
         <hr />
         <span>created by まぁじ</span>
       </footer>
     </div>
-  )
+  );
 };
 
-export default IndexPage
+export default IndexPage;
