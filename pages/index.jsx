@@ -21,7 +21,7 @@ const IndexPage = (props) => {
   if (today.getMonth() == 6 && today.getDate() == 9) emoji = '🎂'
   else if (today.getMonth() == 0 && today.getDate() == 1) emoji = '🎍';
   else if (today.getMonth() == 11 && today.getDate() == 25) emoji = '🎄';
-  const [date, setToday] = useState<string>(today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日 (0時更新)' + emoji);
+  const [date, setToday] = useState(today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日 (0時更新)' + emoji);
 
   const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
 
