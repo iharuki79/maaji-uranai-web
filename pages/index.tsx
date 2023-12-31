@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { Color2RGB } from '../interfaces';
+import { Color2RGB, DateEmoji, MonthEmoji } from '../utils';
+import { utcToZonedTime, formatInTimeZone } from 'date-fns-tz';
 import styles from "./index.module.css";
 
 export async function getServerSideProps(context) {
@@ -9,18 +10,16 @@ export async function getServerSideProps(context) {
     const products = await fetch(`https://uranai-api.hals.one/api`).then(data => data.json());
     return { props: { products } };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { props: { products: [{ seiza: 'エラー座', color: 'エラー色' },] } };
   }
 }
 
 const IndexPage = (props) => {
-  const today = new Date();
+  const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
   const today_result = props['products'][0];
-  let emoji = ['⛄', '⛄', '🌸', '🌸', '🌸', '🌻', '🌻', '🌻', '🍂', '🍂', '🍂', '⛄'][today.getMonth()];
-  if (today.getMonth() == 6 && today.getDate() == 9) emoji = '🎂'
-  else if (today.getMonth() == 0 && today.getDate() == 1) emoji = '🎍';
-  else if (today.getMonth() == 11 && today.getDate() == 25) emoji = '🎄';
+  let emoji = MonthEmoji[today.getMonth()];
+  if (formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd') in DateEmoji) emoji = DateEmoji[formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd')];
   const [date, setToday] = useState<string>(today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日 (0時更新)' + emoji);
 
   const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
