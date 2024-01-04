@@ -20,13 +20,7 @@ export async function getServerSideProps() {
 export default function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
   const todayResult = props.products[0];
-  const emoji = (() => {
-    if (formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd') in DateEmoji) {
-      return DateEmoji[formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd')];
-    } else {
-      return MonthEmoji[today.getMonth()];
-    }
-  })();
+  const emoji = DateEmoji[formatInTimeZone(today, 'Asia/Tokyo', 'MMdd')] ?? MonthEmoji[today.getMonth()];
   const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
 
   return (
@@ -37,7 +31,7 @@ export default function IndexPage(props: InferGetServerSidePropsType<typeof getS
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      {today.getFullYear()}年{today.getMonth() + 1}月{today.getDate()}日 (0時更新){emoji}
+      {formatInTimeZone(today, 'yyyy年M月d日', 'Asia/Tokyo')} (0時更新){emoji}
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
         <h2>{todayResult.seiza}</h2>
