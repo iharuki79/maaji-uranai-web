@@ -31,7 +31,7 @@ export default function IndexPage(props: InferGetServerSidePropsType<typeof getS
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      {formatInTimeZone(today, 'yyyy年M月d日', 'Asia/Tokyo')} (0時更新){emoji}
+      {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年M月d日')} (0時更新){emoji}
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
         <h2>{todayResult.seiza}</h2>
