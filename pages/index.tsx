@@ -1,49 +1,49 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
+import { Lucky } from '../types/Lucky';
 import { colorNameToRGB } from '../utils/colorNameToRGB';
 import { dateToEmoji } from '../utils/dateToEmoji';
 import styles from "./index.module.css";
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-export async function getServerSideProps(context) {
-  try {
-    const host = context.req.headers.host || 'localhost:3000';
-    const products = await fetch(`https://uranai-api.hals.one/api`).then(data => data.json());
-    return { props: { products } };
-  } catch (e) {
-    console.error(e);
-    return { props: { products: [{ seiza: 'エラー座', color: 'エラー色' },] } };
-  }
+const API_ENDPOINT = process.env.NODE_ENV == 'production' ? 'https://uranai-api.hals.one' : 'http://localhost:3000';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const products: Lucky[] = await fetch(`${API_ENDPOINT}/api`)
+    .then((res) => res.json())
+    .catch((e) => {
+      console.error(e);
+      return [{ seiza: 'エラー座', color: 'エラー色' }];
+    });
+  return { props: { products } };
+}
+
+const getTweetUrl = (s: string) => {
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(s)}&url=https://uranai.hals.one/`;
 }
 
 const TweetSeiza = (props: {seiza: string, emoji: string}) => {
-  let href = 'https://twitter.com/intent/tweet?text=';
-  href += encodeURIComponent('⭐まぁじ占い⭐\n今日もっとも運勢のいい星座は...' + props.seiza + '！' + props.emoji + '\n');
-  href += '&url=https://uranai.hals.one/';
   return (
-    <a href={href} target='_blank' rel="noopener noreferrer">
+    <a href={getTweetUrl(`⭐まぁじ占い⭐\n今日もっとも運勢のいい星座は...${props.seiza}！${props.emoji}\n`)} target='_blank' rel="noopener noreferrer">
       星座をツイート
     </a>
   );
 };
 
 const TweetColor = (props: {color: string, emoji: string}) => {
-  let href = 'https://twitter.com/intent/tweet?text=';
-  href += encodeURIComponent('⭐まぁじ占い⭐\n今日のラッキーカラーは…' + props.color + '！' + props.emoji + '\n');
-  href += '&url=https://uranai.hals.one/';
   return (
-    <a href={href} target='_blank' rel="noopener noreferrer">
+    <a href={getTweetUrl(`⭐まぁじ占い⭐\n今日のラッキーカラーは…${props.color}！${props.emoji}\n`)} target='_blank' rel="noopener noreferrer">
       ラッキーカラーをツイート
     </a>
   );
 };
 
-
-const IndexPage = (props) => {
-  const today_result = props['products'][0];
-  const emoji = dateToEmoji(new Date());
-  const date = formatInTimeZone(new Date(), 'Asia/Tokyo', 'yy年MM月dd日');
-  const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
+const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
+  const todayResult = props.products[0];
+  const emoji = dateToEmoji(today);
+  const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
 
   return (
     <div className={styles.page}>
@@ -53,18 +53,18 @@ const IndexPage = (props) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      <span>{date} (0時更新) {emoji}</span>
+      <span>{formatInTimeZone(today, 'Asia/Tokyo', 'yy年MM月dd日')} (0時更新) {emoji}</span>
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
-        <h2>{today_result.seiza}</h2>
+        <h2>{todayResult.seiza}</h2>
       </span>
-      <span className={styles.box2} style={{ color: colorNameToRGB(today_result.color), background: background_color, border: 'solid 3px ' + colorNameToRGB(today_result.color) }}>
+      <span className={styles.box2} style={{ color: colorNameToRGB(todayResult.color), background: backgroundColor, border: 'solid 3px ' + colorNameToRGB(todayResult.color) }}>
         今日のラッキーカラーは...
-        <h2>{today_result.color}</h2>
+        <h2>{todayResult.color}</h2>
       </span>
       <span>
-        <TweetSeiza seiza={today_result.seiza} emoji={emoji} />&ensp;
-        <TweetColor color={today_result.color} emoji={emoji} />&ensp;
+        <TweetSeiza seiza={todayResult.seiza} emoji={emoji} />&ensp;
+        <TweetColor color={todayResult.color} emoji={emoji} />&ensp;
         <nav className={styles.all}>
           <a href="https://uranai-api.hals.one/api/" style={{ color: 'white' }}>API</a>
         </nav>
