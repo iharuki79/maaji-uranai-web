@@ -1,4 +1,4 @@
-export const Color2RGB: { [key: string]: string } = Object.freeze({
+export const Color2RGB = {
     'オレンジ': '#ee7800',
     '青': '#0095d9',
     '灰': '#808080',
@@ -11,9 +11,9 @@ export const Color2RGB: { [key: string]: string } = Object.freeze({
     '茶': '#734e30',
     '赤': '#e60033',
     '水色': '#a9ceec'
-});
+} as const;
 
-export const DateEmoji: { [key: string]: string } = Object.freeze({
+export const DateEmoji = {
     '0101': '🎍',
     '0111': '🐶',
     '0203': '👹',
@@ -30,6 +30,6 @@ export const DateEmoji: { [key: string]: string } = Object.freeze({
     '1131': '🎃',
     '1225': '🎄',
     '1231': '🛎️',
-});
+} as const;
 
-export const MonthEmoji: string[] = ['⛄', '⛄', '🌸', '🌸', '🌸', '🌻', '🌻', '🌻', '🍂', '🍂', '🍂', '⛄'];
+export const MonthEmoji = ['⛄', '⛄', '🌸', '🌸', '🌸', '🌻', '🌻', '🌻', '🍂', '🍂', '🍂', '⛄'] as const;
