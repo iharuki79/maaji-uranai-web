@@ -1,4 +1,4 @@
 export type Lucky = {
-  seiza: string
-  color: string
+  seiza: string;
+  color: string;
 };
