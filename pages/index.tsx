@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { formatInTimeZone } from 'date-fns-tz';
 import { colorNameToRGB } from '../utils/colorNameToRGB';
 import { dateToEmoji } from '../utils/dateToEmoji';
-import { utcToZonedTime, formatInTimeZone } from 'date-fns-tz';
 import styles from "./index.module.css";
-import { Lucky } from '../types/Lucky';
 
 export async function getServerSideProps(context) {
   try {
