@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
 const IndexPage = (props) => {
   const today_result = props['products'][0];
   const emoji = dateToEmoji(new Date());
-  const date = `${formatInTimeZone(new Date(), 'Asia/Tokyo', 'yy年MM月dd日')} (0時更新) ${emoji}`;
+  const date = formatInTimeZone(new Date(), 'Asia/Tokyo', 'yy年MM月dd日');
 
   const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
 
@@ -52,7 +52,7 @@ const IndexPage = (props) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      {date}
+      <span>{date} (0時更新) {emoji}</span>
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
         <h2>{today_result.seiza}</h2>
