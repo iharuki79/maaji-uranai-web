@@ -22,5 +22,5 @@ const dateEmoji: Record<string, string> = {
 const monthEmoji = ['⛄', '⛄', '🌸', '🌸', '🌸', '🌻', '🌻', '🌻', '🍂', '🍂', '🍂', '⛄'] as const;
 
 export const dateToEmoji = (date: Date): string => {
-  return dateEmoji[formatInTimeZone(date, 'Asia/Tokyo', 'MMdd')] ?? monthEmoji[date.getMonth()];
+  return dateEmoji[formatInTimeZone(date, 'Asia/Tokyo', 'MMdd')] ?? monthEmoji[date.getMonth()] ?? '⚠️';
 };

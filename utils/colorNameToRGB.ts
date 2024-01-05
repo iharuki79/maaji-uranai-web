@@ -14,5 +14,5 @@ const colors: Record<string, string> = {
 } as const;
 
 export const colorNameToRGB = (name: string): string => {
-  return colors[name];
+  return colors[name] ?? '#000000';
 };
