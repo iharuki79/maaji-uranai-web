@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { Color2RGB, DateEmoji, MonthEmoji } from '../utils';
+import { colorNameToRGB } from '../utils/colorNameToRGB';
+import { dateToEmoji } from '../utils/dateToEmoji';
 import { utcToZonedTime, formatInTimeZone } from 'date-fns-tz';
 import styles from "./index.module.css";
+import { Lucky } from '../types/Lucky';
 
 export async function getServerSideProps(context) {
   try {
@@ -16,11 +18,9 @@ export async function getServerSideProps(context) {
 }
 
 const IndexPage = (props) => {
-  const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
   const today_result = props['products'][0];
-  let emoji = MonthEmoji[today.getMonth()];
-  if (formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd') in DateEmoji) emoji = DateEmoji[formatInTimeZone(new Date(), 'Asia/Tokyo', 'MMdd')];
-  const [date, setToday] = useState<string>(today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日 (0時更新)' + emoji);
+  const emoji = dateToEmoji(new Date());
+  const date = `${formatInTimeZone(new Date(), 'Asia/Tokyo', 'yy年MM月dd日')} (0時更新) ${emoji}`;
 
   const background_color = today_result.color === '白' ? '#888888' : '#FFFFFF';
 
@@ -58,7 +58,7 @@ const IndexPage = (props) => {
         今日もっとも運勢のいい星座は...
         <h2>{today_result.seiza}</h2>
       </span>
-      <span className={styles.box2} style={{ color: Color2RGB[today_result.color], background: background_color, border: 'solid 3px ' + Color2RGB[today_result.color] }}>
+      <span className={styles.box2} style={{ color: colorNameToRGB(today_result.color), background: background_color, border: 'solid 3px ' + colorNameToRGB(today_result.color) }}>
         今日のラッキーカラーは...
         <h2>{today_result.color}</h2>
       </span>
