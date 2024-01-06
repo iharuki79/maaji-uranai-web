@@ -1,45 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
 .all {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .box2 {
-    padding: 0.5em 1em;
-    margin: 1em 0;
-    font-weight: bold;
-    color: #000000;
-    /*文字色*/
-    background: #FFF;
-    border: solid 3px #000000;
-    /*線*/
-    border-radius: 10px;
-    /*角の丸み*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  font-weight: bold;
+  color: #000000;
+  /*文字色*/
+  background: #fff;
+  border: solid 3px #000000;
+  /*線*/
+  border-radius: 10px;
+  /*角の丸み*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .box2 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* min-height: 80vh; */
-    flex-direction: column;
-    gap: 5px;
-    font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 80vh; */
+  flex-direction: column;
+  gap: 5px;
+  font-family: 'Noto Sans JP', sans-serif;
 }
-
 
 /* 
 .span {

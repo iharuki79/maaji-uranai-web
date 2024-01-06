@@ -1,13 +1,20 @@
 import React from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import { utcToZonedTime, formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
+import type { Lucky } from '../types/Lucky';
+import { colorNameToRGB } from '../utils/colorNameToRGB';
+import { dateToEmoji } from '../utils/dateToEmoji';
+import { getTweetUrl } from '../utils/getTweetUrl';
 import styles from './index.module.css';
-import { InferGetServerSidePropsType } from 'next';
-import { Color, DateEmoji, Lucky, MonthEmoji } from '../interfaces';
 
-const API_ENDPOINT = process.env.NODE_ENV == 'production' ? 'https://uranai-api.hals.one' : 'http://localhost:3000';
+const API_ENDPOINT = 'https://uranai-api.hals.one';
 
-export async function getServerSideProps() {
+type Props = {
+  products: Lucky[];
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const products: Lucky[] = await fetch(`${API_ENDPOINT}/api`)
     .then((res) => res.json())
     .catch((e) => {
@@ -15,12 +22,12 @@ export async function getServerSideProps() {
       return [{ seiza: 'エラー座', color: 'エラー色' }];
     });
   return { props: { products } };
-}
+};
 
-export default function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
   const todayResult = props.products[0];
-  const emoji = DateEmoji[formatInTimeZone(today, 'Asia/Tokyo', 'MMdd')] ?? MonthEmoji[today.getMonth()];
+  const emoji = dateToEmoji(today);
   const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
 
   return (
@@ -31,7 +38,9 @@ export default function IndexPage(props: InferGetServerSidePropsType<typeof getS
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年M月d日')} (0時更新){emoji}
+      <span>
+        {formatInTimeZone(today, 'Asia/Tokyo', 'yy年MM月dd日')} (0時更新) {emoji}
+      </span>
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
         <h2>{todayResult.seiza}</h2>
@@ -39,9 +48,9 @@ export default function IndexPage(props: InferGetServerSidePropsType<typeof getS
       <span
         className={styles.box2}
         style={{
-          color: Color[todayResult.color],
+          color: colorNameToRGB(todayResult.color),
           background: backgroundColor,
-          border: 'solid 3px ' + Color[todayResult.color],
+          border: 'solid 3px ' + colorNameToRGB(todayResult.color),
         }}
       >
         今日のラッキーカラーは...
@@ -85,6 +94,4 @@ export default function IndexPage(props: InferGetServerSidePropsType<typeof getS
   );
 }
 
-function getTweetUrl(s: string) {
-  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(s)}&url=https://uranai.hals.one/`;
-}
+export default IndexPage;
