@@ -8,7 +8,7 @@ import { dateToEmoji } from '../utils/dateToEmoji';
 import { getTweetUrl } from '../utils/getTweetUrl';
 import styles from './index.module.css';
 
-const API_ENDPOINT = process.env.NODE_ENV == 'production' ? 'https://uranai-api.hals.one' : 'http://localhost:3000';
+const API_ENDPOINT = 'https://uranai-api.hals.one';
 
 type Props = {
   products: Lucky[];
@@ -93,3 +93,5 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
     </div>
   );
 }
+
+export default IndexPage;
