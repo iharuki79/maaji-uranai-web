@@ -93,7 +93,3 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
     </div>
   );
 }
-
-function getTweetUrl(s: string) {
-  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(s)}&url=https://uranai.hals.one/`;
-}
