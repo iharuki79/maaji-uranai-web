@@ -42,7 +42,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <script type='application/ld+json'>{
           '{ "@context": "http://schema.org", "@type": "WebSite", "url": "https://uranai.hals.one/", "name": "まぁじ占いWeb版", "author": { "@type": "Person", "name":"まぁじ" }, "description": "⭐まぁじ占い⭐web版です。今日ラッキーな星座とラッキーカラーを占います。", "keywords": "まぁじ占い,まぁじ,占い,星座,ラッキーカラー"}'}
         </script>
-        <link rel="icon" type="image/png" href="/public/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.ico" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
       <span>
