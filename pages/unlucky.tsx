@@ -1,12 +1,19 @@
 import React from 'react';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { AppProps } from 'next/app';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 import type { Lucky } from '../types/Lucky';
 import { colorNameToRGB } from '../utils/colorNameToRGB';
 import { dateToEmoji } from '../utils/dateToEmoji';
 import { getTweetUrl } from '../utils/getTweetUrl';
-import styles from './index.module.css';
+import './unlucky.css';
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <>
+    <Component {...pageProps} />
+  </>
+);
 
 const API_ENDPOINT = 'https://uranai-api.hals.one';
 
@@ -15,7 +22,7 @@ type Props = {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const products: Lucky[] = await fetch(`${API_ENDPOINT}/api`)
+  const products: Lucky[] = await fetch(`${API_ENDPOINT}/api/unlucky`)
     .then((res) => res.json())
     .catch((e) => {
       console.error(e);
@@ -28,15 +35,15 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
   const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
   const todayResult = props.products[0];
   const emoji = dateToEmoji(today);
-  const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
+  const backgroundColor = todayResult.color === '黒' ? '#aa0000' : '#000000';
 
   return (
-    <div className={styles.page}>
+    <div className='page'>
       <Head>
-        <title>まぁじ占いweb版</title>
+        <title>裏まぁじ占いweb版</title>
         <meta charSet="utf-8" />
         <meta name="author" content="まぁじ" />
-        <meta name="description" content="⭐まぁじ占い⭐web版です。今日ラッキーな星座とラッキーカラーを占います。" />
+        <meta name="description" content="👾裏まぁじ占い👾web版です。" />
         <meta name="keywords" content="まぁじ占い,まぁじ,占い,星座,ラッキーカラー" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script type='application/ld+json'>{
@@ -44,28 +51,28 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         </script>
         <link rel="icon" type="image/png" href="/favicon.ico" />
       </Head>
-      <h1>⭐まぁじ占い⭐</h1>
+      <h1>👾裏まぁじ占い👾</h1>
       <span>
         {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新) {emoji}
       </span>
-      <span className={styles.box2}>
-        今日もっとも運勢のいい星座は...
+      <span className='box'>
+        今日もっとも運勢の悪い星座は...
         <h2>{todayResult.seiza}</h2>
       </span>
       <span
-        className={styles.box2}
+        className='box'
         style={{
           color: colorNameToRGB(todayResult.color),
           background: backgroundColor,
           border: 'solid 3px ' + colorNameToRGB(todayResult.color),
         }}
       >
-        今日のラッキーカラーは...
+        今日のアンラッキーカラーは...
         <h2>{todayResult.color}</h2>
       </span>
       <span>
         <a
-          href={getTweetUrl(`⭐まぁじ占い⭐\n今日もっとも運勢のいい星座は...${todayResult.seiza}！${emoji}\n`)}
+          href={getTweetUrl(`👾裏まぁじ占い👾\n今日もっとも運勢の悪い星座は...${todayResult.seiza}！${emoji}\n`)}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -73,21 +80,21 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         </a>
         &ensp;
         <a
-          href={getTweetUrl(`⭐まぁじ占い⭐\n今日のラッキーカラーは…${todayResult.color}！${emoji}\n`)}
+          href={getTweetUrl(`👾裏まぁじ占い👾\n今日のアンラッキーカラーは…${todayResult.color}！${emoji}\n`)}
           target="_blank"
           rel="noopener noreferrer"
         >
-          ラッキーカラーをツイート
+          アンラッキーカラーをツイート
         </a>
-        <nav className={styles.all}>
-          <a href="https://uranai-api.hals.one/api/" style={{ opacity: 0 }}>
+        <nav>
+          <a href="https://uranai-api.hals.one/api/unlucky" style={{ opacity: 0 }}>
             API
           </a>
         </nav>
       </span>
-      <details className={styles.all}>
-        <summary className={styles.all}>※注意※</summary>
-        ⭐まぁじ占い⭐は完全に適当でありこれによって生じたことについて責任を負いません。ご注意ください。
+      <details>
+        <summary>※注意※</summary>
+        👾裏まぁじ占い👾は適当じゃない。
       </details>
       <p>
         不具合報告は<a href="https://x.com/Hals_SC">Twitter</a>, もしくは
