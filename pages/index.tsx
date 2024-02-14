@@ -6,7 +6,9 @@ import type { Lucky } from '../types/Lucky';
 import { colorNameToRGB } from '../utils/colorNameToRGB';
 import { dateToEmoji } from '../utils/dateToEmoji';
 import { getTweetUrl } from '../utils/getTweetUrl';
+import { dropEmoji } from '../utils/dropEmoji';
 import styles from './index.module.css';
+import './valentine.css';
 
 const API_ENDPOINT = 'https://uranai-api.hals.one';
 
@@ -29,6 +31,12 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
   const todayResult = props.products[0];
   const emoji = dateToEmoji(today);
   const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
+  const handleOnClick = (event: any) => {
+    event.stopPropagation(); // 親要素へのイベント伝播を防ぐ
+    for (let i = 0; i < Math.random() * 5 + 5; i++) {
+      dropEmoji(event.target.innerText);
+    }
+  };
 
   return (
     <div className={styles.page}>
@@ -45,9 +53,10 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <link rel="icon" type="image/png" href="/favicon.ico" />
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
-      <span>
-        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新) {emoji}
-      </span>
+      <div>
+        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新)
+        <span id='clickable' style={{ cursor: 'pointer', position: 'absolute', zIndex: 'calc(Infinity)' }} onClick={handleOnClick}>{emoji}</span>
+      </div>
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
         <h2>{todayResult.seiza}</h2>
@@ -97,7 +106,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <hr />
         <span>created by まぁじ</span>
       </footer>
-    </div>
+    </div >
   );
 }
 
