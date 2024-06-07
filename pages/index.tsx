@@ -99,8 +99,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         ⭐まぁじ占い⭐は完全に適当でありこれによって生じたことについて責任を負いません。ご注意ください。
       </details>
       <p>
-        不具合報告は<a href="https://x.com/Hals_SC">Twitter</a>, もしくは
-        <a href="https://github.com/HalsSC/maaji-uranai-web">GitHub</a>まで
+        不具合報告は<a href="https://github.com/HalsSC/maaji-uranai-web">GitHub</a>まで
       </p>
       <footer>
         <hr />
