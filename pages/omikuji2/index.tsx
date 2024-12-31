@@ -36,7 +36,7 @@ const IndexPage = () => {
     
     const tmpTitle = `${userName.length === 0 ? "" : `${userName}さんの`}2025年の運勢🐍`;
     setResultTitle( tmpTitle );
-    setTweetUrl(getTweetUrlNoLink(`⛩いしかわ神社⛩\n\n${tmpTitle}は…\n\n${tmpResult}！\n`, "https://uranai.hals.one/omikuji"));
+    setTweetUrl(getTweetUrlNoLink(`⛩いしかわ神社⛩\n\n${tmpTitle}は…\n\n${tmpResult}！\n`, "https://uranai.hals.one/omikuji2"));
   }
 
   const onClickSave = () => {
