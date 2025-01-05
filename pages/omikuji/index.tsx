@@ -1,5 +1,6 @@
 import type React from "react";
 import {useState} from "react";
+import Head from 'next/head';
 import html2canvas from "html2canvas";
 import { getTweetUrlNoLink } from "../../utils/getTweetUrl";
 import styled from "./omikuji.module.scss";
@@ -60,6 +61,26 @@ const IndexPage = () => {
 
   return (
     <div className={styled.all}>
+      <Head>
+        <title>まぁじ神社</title>
+        <meta charSet="utf-8" />
+        <meta name="author" content="まぁじ" />
+        <meta name="description" content="⛩まぁじ神社⛩のおみくじです。名前を入力して引いてみよう！" />
+        <meta name="keywords" content="まぁじ神社,まぁじ,おみくじ" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:title" content="まぁじ神社" />
+        <meta property="og:description" content="⛩まぁじ神社⛩のおみくじです。名前を入力して引いてみよう！" />
+        <meta property="og:image" content="https://uranai.hals.one/omikuji_box.png" />
+        <meta property="og:url" content="https://uranai.hals.one/omikuji" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="まぁじ神社" />
+        <meta name="twitter:description" content="まぁじ神社のおみくじ" />
+        <meta name="twitter:image" content="https://uranai.hals.one/omikuji_box.png" />
+        <script type='application/ld+json'>{
+          '{ "@context": "http://schema.org", "@type": "WebSite", "url": "https://uranai.hals.one/", "name": "まぁじ神社", "author": { "@type": "Person", "name":"まぁじ" }, "description": "⛩まぁじ神社⛩のおみくじです。名前を入力して引いてみよう！", "keywords": "まぁじ神社,まぁじ,おみくじ"}'}
+        </script>
+        <link rel="icon" type="image/png" href="/favicon.ico" />
+      </Head>
       <h1 className={styled.heading}>
         <span className={styled.emoji}>⛩</span>
         <span>まぁじ神社</span>

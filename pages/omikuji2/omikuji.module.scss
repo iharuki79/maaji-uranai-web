@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap');
 
 .all {
   text-align: center;
@@ -24,7 +25,7 @@
       line-height: 1.5;
     }
 
-    font-family: 'Noto Sans JP',
+    font-family: 'Noto Serif JP',
     sans-serif;
 
     img {
@@ -73,7 +74,7 @@
       line-height: 1.2;
     }
 
-    font-family: 'Noto Sans JP',
+    font-family: 'Noto Serif JP',
     sans-serif;
   }
 
@@ -147,6 +148,7 @@
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
+    font-family: 'Noto Sans JP', sans-serif;
 
     &:hover {
       background-color: #4c70ba;

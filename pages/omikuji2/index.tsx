@@ -1,5 +1,6 @@
 import type React from "react";
 import {useState} from "react";
+import Head from 'next/head';
 import html2canvas from "html2canvas";
 import { getTweetUrlNoLink } from "../../utils/getTweetUrl";
 import styled from "./omikuji.module.scss";
@@ -60,6 +61,18 @@ const IndexPage = () => {
 
   return (
     <div className={styled.all}>
+      <Head>
+        <title>いしかわ神社</title>
+        <meta name="description" content="いしかわ神社のおみくじ" />
+        <meta property="og:title" content="いしかわ神社" />
+        <meta property="og:description" content="いしかわ神社のおみくじ" />
+        <meta property="og:image" content="https://uranai.hals.one/omikuji_box.png" />
+        <meta property="og:url" content="https://uranai.hals.one/omikuji2" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="いしかわ神社" />
+        <meta name="twitter:description" content="いしかわ神社のおみくじ" />
+        <meta name="twitter:image" content="https://uranai.hals.one/omikuji_box.png" />
+      </Head>
       <h1 className={styled.heading}>
         <span className={styled.emoji}>⛩</span>
         <span>いしかわ神社</span>
