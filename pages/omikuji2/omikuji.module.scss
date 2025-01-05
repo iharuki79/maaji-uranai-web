@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap');
+
+.all {
+  text-align: center;
+  vertical-align: middle;
+  max-width: 400px;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .heading {
+    margin: 0 auto;
+
+    @media (max-width: 400px) {
+      font-size: 20px;
+      line-height: 1.0;
+    }
+
+    @media (min-width: 399px) {
+      font-size: 30px;
+      line-height: 1.5;
+    }
+
+    font-family: 'Noto Serif JP',
+    sans-serif;
+
+    img {
+      width: 30px;
+      vertical-align: middle;
+    }
+
+    .emoji {
+      font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+    }
+  }
+
+  .inputArea {
+    margin-top: 20px;
+
+    p {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    .todoInputField {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      vertical-align: center;
+    }
+
+    img.drawOmikujiButton {
+      height: 50px;
+      cursor: pointer;
+      vertical-align: bottom;
+    }
+  }
+
+  .heading2 {
+    @media (max-width: 400px) {
+      font-size: 16px;
+      line-height: 1.0;
+    }
+
+    @media (min-width: 399px) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    font-family: 'Noto Serif JP',
+    sans-serif;
+  }
+
+  .omikujiArea {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdf5e6;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+    padding: 10px;
+    text-align: center;
+
+    .omikujiCard {
+      width: 350px;
+      height: 450px;
+      background-color: #fdf5e6;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+      background-size: 4px 4px;
+      border: 6px double red;
+      position: relative;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .omikujiInner {
+        width: 300px;
+        height: 400px;
+        border: 4px dashed #000;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    .omikujiResult {
+      font-size: 35px;
+      font-weight: bold;
+      line-height: 1.5;
+      color: red;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      padding: 10px;
+    }
+  }
+}
+
+.shareArea {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .shareButton {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #3b5998;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    font-family: 'Noto Sans JP', sans-serif;
+
+    &:hover {
+      background-color: #4c70ba;
+    }
+  }
+
+  .shareButton.twitter {
+    background-color: #1da1f2;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #3da9f4;
+    }
+  }
+}

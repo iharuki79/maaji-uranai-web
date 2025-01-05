@@ -94,6 +94,12 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
           </a>
         </nav>
       </span>
+      <a href="./omikuji" className={styles.all}>
+        おみくじページへ
+      </a>
+      <a href="/unlucky" className={styles.all}>
+        裏まぁじ占いへ
+      </a>      
       <details className={styles.all}>
         <summary className={styles.all}>※注意※</summary>
         ⭐まぁじ占い⭐は完全に適当でありこれによって生じたことについて責任を負いません。ご注意ください。
