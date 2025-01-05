@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 import type { Lucky } from '../types/Lucky';
@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 };
 
 const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
+  const today = utcToZonedTime(`${formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd')} 09:01`, 'Asia/Tokyo');
   const todayResult = props.products[0];
   const emoji = dateToEmoji(today);
   const backgroundColor = todayResult.color === '白' ? '#888888' : '#FFFFFF';
@@ -55,7 +55,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
       <h1>⭐まぁじ占い⭐</h1>
       <div>
         {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新)
-        <span id='clickable' style={{ cursor: 'pointer', position: 'absolute', zIndex: 'calc(Infinity)' }} onClick={handleOnClick}>{emoji}</span>
+        <span id='clickable' style={{ cursor: 'pointer', position: 'absolute', zIndex: 'calc(Infinity)' }} onClick={handleOnClick} onKeyUp={handleOnClick} tabIndex={0}>{emoji}</span>
       </div>
       <span className={styles.box2}>
         今日もっとも運勢のいい星座は...
@@ -66,7 +66,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         style={{
           color: colorNameToRGB(todayResult.color),
           background: backgroundColor,
-          border: 'solid 3px ' + colorNameToRGB(todayResult.color),
+          border: `solid 3px ${colorNameToRGB(todayResult.color)}`,
         }}
       >
         今日のラッキーカラーは...

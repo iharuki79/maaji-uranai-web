@@ -1,7 +1,7 @@
 import React from 'react';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 import type { Lucky } from '../types/Lucky';
 import { colorNameToRGB } from '../utils/colorNameToRGB';
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 };
 
 const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const today = utcToZonedTime(formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' 09:01', 'Asia/Tokyo');
+  const today = utcToZonedTime(`${formatInTimeZone(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd')} 09:01`, 'Asia/Tokyo');
   const todayResult = props.products[0];
   const emoji = dateToEmoji(today);
   const backgroundColor = todayResult.color === '黒' ? '#aa0000' : '#000000';
@@ -64,7 +64,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         style={{
           color: colorNameToRGB(todayResult.color),
           background: backgroundColor,
-          border: 'solid 3px ' + colorNameToRGB(todayResult.color),
+          border: `solid 3px ${colorNameToRGB(todayResult.color)}`,
         }}
       >
         今日のアンラッキーカラーは...
