@@ -53,7 +53,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <h1>👾裏まぁじ占い👾</h1>
       <span>
-        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新) {emoji}
+        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} {emoji}
       </span>
       <span className='box'>
         今日もっとも運勢の悪い星座は...

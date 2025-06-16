@@ -60,7 +60,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <h1>⭐まぁじ占い⭐</h1>
       <div>
-        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')} (0時更新)
+        {formatInTimeZone(today, 'Asia/Tokyo', 'yyyy年MM月dd日')}
         <span id='clickable' style={{ cursor: 'pointer', position: 'absolute', zIndex: 'calc(Infinity)' }} onClick={handleOnClick} onKeyUp={handleOnClick} tabIndex={0}>{emoji}</span>
       </div>
       <span className={styles.box2}>
@@ -105,7 +105,7 @@ const IndexPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
       </a>
       <a href="/unlucky" className={styles.all}>
         裏まぁじ占いへ
-      </a>      
+      </a>
       <details className={styles.all}>
         <summary className={styles.all}>※注意※</summary>
         ⭐まぁじ占い⭐は完全に適当でありこれによって生じたことについて責任を負いません。ご注意ください。
