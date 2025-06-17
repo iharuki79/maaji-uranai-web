@@ -20,14 +20,13 @@ export const Fortune: React.FC<FortuneProps> = ({
   isUnlucky = false,
   noDate = false,
 }) => {
-  const backgroundColor =
-    color === (isUnlucky ? '黒' : '白')
-      ? isUnlucky
-        ? '#aa0000'
-        : '#888888'
-      : isUnlucky
-        ? '#000000'
-        : '#FFFFFF';
+  const backgroundColor = (() => {
+    if (color === (isUnlucky ? '黒' : '白')) {
+      return isUnlucky ? '#aa0000' : '#888888';
+    } else {
+      return isUnlucky ? '#000000' : '#FFFFFF';
+    }
+  })();
 
   const prefix = isUnlucky ? '👾裏まぁじ占い👾' : '⭐まぁじ占い⭐';
   const seizaText = isUnlucky ? '運勢の悪い星座' : '運勢のいい星座';

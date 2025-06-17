@@ -8,7 +8,8 @@ import { setupServer } from 'msw/node';
 // グローバルなモックサーバーの設定
 export const server = setupServer(
   // APIのモックハンドラーをここに追加
-  rest.get('https://uranai-api.hals.one/api/:date', (_req, res, ctx) => {
+  rest.get('https://uranai-api.hals.one/api', (req, res, ctx) => {
+    const date = req.url.searchParams.get('date'); // Extract the 'date' query parameter
     return res(
       ctx.json({
         seiza: 'おひつじ座',

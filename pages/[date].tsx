@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const todayStr = jstToday.toISOString().split('T')[0];
 
   // 日付が未来の場合は404
-  if (dateParam > todayStr) {
+  if (new Date(dateParam) > new Date(todayStr)) {
     return {
       notFound: true,
     };
