@@ -1,5 +1,5 @@
-import { ApiError, InvalidResponseError } from './errors';
 import { dateToEmoji } from './dateToEmoji';
+import { ApiError, InvalidResponseError } from './errors';
 
 const API_ENDPOINT = 'https://uranai-api.hals.one';
 

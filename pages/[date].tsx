@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { Fortune } from '../components/Fortune';
 import { getFortune } from '../utils/api';
 import { formatJapaneseDate, parseDateFromUrlParam } from '../utils/dateUtils';
-import { Fortune } from '../components/Fortune';
 
 type Props = {
   date: string;

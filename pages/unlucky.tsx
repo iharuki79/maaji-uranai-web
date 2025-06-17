@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { Fortune } from '../components/Fortune';
 import { getUnlucky } from '../utils/api';
 import { dateToEmoji } from '../utils/dateToEmoji';
-import { Fortune } from '../components/Fortune';
 import { ApiError, InvalidResponseError } from '../utils/errors';
 import './unlucky.css';
 import { formatJapaneseDate, getTodayDateString } from '../utils/dateUtils';
