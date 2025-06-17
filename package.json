@@ -4,8 +4,14 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc"
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format .",
+    "format:fix": "biome format --write .",
+    "check": "biome check --apply .",
+    "type-check": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "date-fns": "^2.30.0",
@@ -17,9 +23,22 @@
     "sass": "^1.83.0"
   },
   "devDependencies": {
-    "@types/node": "^12.12.21",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
+    "@biomejs/biome": "^1.9.4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__traverse": "^7.20.7",
+    "@types/istanbul-lib-coverage": "^2.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^18",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/stack-utils": "^2.0.3",
+    "@types/statuses": "^2.0.6",
+    "@types/tough-cookie": "^4.0.5",
+    "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
+    "msw": "^2.10.2",
     "typescript": "^4.8.3"
   }
 }
